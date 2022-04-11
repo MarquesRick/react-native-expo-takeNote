@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export function Nota() {
+export function Nota({ item }) {
   const categorias = {
     Pessoal: '#FF924F',
     Outros: '#00911F',
@@ -12,7 +12,7 @@ export function Nota() {
   return (
     <View style={style.cartao}>
       <Text style={style.texto} numberOfLines={5}>
-        Lorem ipsum
+        {item[1]}
       </Text>
     </View>
   );

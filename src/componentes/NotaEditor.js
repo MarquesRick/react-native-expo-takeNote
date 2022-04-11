@@ -8,30 +8,31 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function NotaEditor({ mostraNotas }) {
   const [texto, setTexto] = useState('');
   const [modalVisivel, setModalVisivel] = useState(false);
 
-  const salvaNota = async () => {
-    const novoId = await geraId();
-    const umaNota = {
-      id: novoId.toString(),
-      texto: texto,
-    };
+  //asyncstorage
+  // const salvaNota = async () => {
+  //   const novoId = await geraId();
+  //   const umaNota = {
+  //     id: novoId.toString(),
+  //     texto: texto,
+  //   };
 
-    await AsyncStorage.setItem(umaNota.id, umaNota.texto);
-    mostraNotas();
-  };
+  //   await AsyncStorage.setItem(umaNota.id, umaNota.texto);
+  //   mostraNotas();
+  // };
 
-  const geraId = async () => {
-    const todasChaves = await AsyncStorage.getAllKeys();
-    console.log(todasChaves);
-    if (todasChaves <= 0) return 1;
+  // const geraId = async () => {
+  //   const todasChaves = await AsyncStorage.getAllKeys();
+  //   console.log(todasChaves);
+  //   if (todasChaves <= 0) return 1;
 
-    return todasChaves.length + 1;
-  };
+  //   return todasChaves.length + 1;
+  // };
 
   return (
     <>

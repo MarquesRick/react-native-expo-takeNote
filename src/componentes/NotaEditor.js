@@ -1,36 +1,70 @@
-import React, { useState } from "react"
-import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native"
+import React, { useState } from 'react';
+import {
+  Modal,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function NotaEditor() {
+  const [texto, setTexto] = useState('');
+  const [modalVisivel, setModalVisivel] = useState(false);
 
-  const [texto, setTexto] = useState("")
-  const [modalVisivel, setModalVisivel] = useState(false)
+  const salvaNota = async () => {
+    console.log('entrou');
+    const umaNota = {
+      id: '1',
+      texto: texto,
+    };
 
-  return(
+    await AsyncStorage.setItem(umaNota.id, umaNota.texto);
+    mostraNota();
+  };
+
+  const mostraNota = async () => {
+    console.log(await AsyncStorage.getItem('1'));
+  };
+
+  return (
     <>
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisivel}
-        onRequestClose={() => {setModalVisivel(false)}}
+        onRequestClose={() => {
+          setModalVisivel(false);
+        }}
       >
         <View style={estilos.centralizaModal}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={estilos.modal}>
               <Text style={estilos.modalTitulo}>Criar nota</Text>
               <Text style={estilos.modalSubTitulo}>Conteúdo da nota</Text>
-              <TextInput 
+              <TextInput
                 style={estilos.modalInput}
                 multiline={true}
                 numberOfLines={3}
-                onChangeText={novoTexto => setTexto(novoTexto)}
+                onChangeText={(novoTexto) => setTexto(novoTexto)}
                 placeholder="Digite aqui seu lembrete"
-                value={texto}/>
+                value={texto}
+              />
               <View style={estilos.modalBotoes}>
-                <TouchableOpacity style={estilos.modalBotaoSalvar}>
+                <TouchableOpacity
+                  style={estilos.modalBotaoSalvar}
+                  onPress={() => salvaNota()}
+                >
                   <Text style={estilos.modalBotaoTexto}>Salvar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={estilos.modalBotaoCancelar} onPress={() => {setModalVisivel(false)}}>
+                <TouchableOpacity
+                  style={estilos.modalBotaoCancelar}
+                  onPress={() => {
+                    setModalVisivel(false);
+                  }}
+                >
                   <Text style={estilos.modalBotaoTexto}>Cancelar</Text>
                 </TouchableOpacity>
               </View>
@@ -38,21 +72,26 @@ export default function NotaEditor() {
           </ScrollView>
         </View>
       </Modal>
-      <TouchableOpacity onPress={() => {setModalVisivel(true)}} style={estilos.adicionarMemo}>
+      <TouchableOpacity
+        onPress={() => {
+          setModalVisivel(true);
+        }}
+        style={estilos.adicionarMemo}
+      >
         <Text style={estilos.adicionarMemoTexto}>+</Text>
       </TouchableOpacity>
     </>
-  )
+  );
 }
 
 const estilos = StyleSheet.create({
   centralizaModal: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "flex-end"
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
   modal: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     paddingHorizontal: 16,
     paddingTop: 16,
     paddingBottom: 32,
@@ -60,7 +99,7 @@ const estilos = StyleSheet.create({
     marginHorizontal: 16,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 5,
@@ -71,7 +110,7 @@ const estilos = StyleSheet.create({
   },
   modalTitulo: {
     fontSize: 28,
-    fontWeight: "600",
+    fontWeight: '600',
     marginBottom: 18,
   },
   modalInput: {
@@ -79,59 +118,59 @@ const estilos = StyleSheet.create({
     marginBottom: 12,
     paddingHorizontal: 4,
     borderBottomWidth: 1,
-    borderBottomColor: "#FF9A94",
+    borderBottomColor: '#FF9A94',
   },
   modalPicker: {
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: "#EEEEEE",
+    borderColor: '#EEEEEE',
     marginBottom: 12,
   },
   modalSubTitulo: {
     fontSize: 14,
     marginBottom: 8,
-    fontWeight: "600"
+    fontWeight: '600',
   },
   modalBotoes: {
-    flexDirection: "row",
-    justifyContent: "space-between"
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   modalBotaoSalvar: {
-    backgroundColor: "#2ea805",
+    backgroundColor: '#2ea805',
     borderRadius: 5,
     padding: 8,
     width: 80,
-    alignItems: "center",
+    alignItems: 'center',
   },
   modalBotaoDeletar: {
-    backgroundColor: "#d62a18",
+    backgroundColor: '#d62a18',
     borderRadius: 5,
     padding: 8,
     width: 80,
-    alignItems: "center",
+    alignItems: 'center',
   },
   modalBotaoCancelar: {
-    backgroundColor: "#057fa8",
+    backgroundColor: '#057fa8',
     borderRadius: 5,
     padding: 8,
     width: 80,
-    alignItems: "center",
+    alignItems: 'center',
   },
   modalBotaoTexto: {
-    color: "#FFFFFF",
+    color: '#FFFFFF',
   },
   adicionarMemo: {
-    backgroundColor: "#54ba32",
-    justifyContent: "center",
+    backgroundColor: '#54ba32',
+    justifyContent: 'center',
     height: 64,
     width: 64,
     margin: 16,
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 9999,
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     right: 0,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -143,6 +182,6 @@ const estilos = StyleSheet.create({
   adicionarMemoTexto: {
     fontSize: 32,
     lineHeight: 40,
-    color: "#FFFFFF",
-  }
+    color: '#FFFFFF',
+  },
 });

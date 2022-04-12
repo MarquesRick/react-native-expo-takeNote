@@ -7,6 +7,7 @@ import { buscarNotas, criarTabela } from './src/services/Notas';
 
 export default function App() {
   const [notas, setNotas] = useState([]);
+  const [notaSelecionada, setNotaSelecionada] = useState({});
 
   useEffect(() => {
     criarTabela();
@@ -29,10 +30,15 @@ export default function App() {
     <SafeAreaView style={estilos.container}>
       <FlatList
         data={notas}
-        renderItem={(nota) => <Nota {...nota} />}
+        renderItem={(nota) => (
+          <Nota {...nota} setNotaSelecionada={setNotaSelecionada} />
+        )}
         keyExtractor={(nota) => nota.id}
       />
-      <NotaEditor mostraNotas={mostraNotas()} />
+      <NotaEditor
+        mostraNotas={mostraNotas()}
+        notaSelecionada={notaSelecionada}
+      />
       {/*asyncstorage <NotaEditor mostraNotas={mostraNotas} /> */}
       <NotaEditor />
       <StatusBar />

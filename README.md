@@ -1,6 +1,7 @@
 Using Expo
 Using AsyncStorage
 Using Sqlite
+Using React Picker
 
 AsyncStore só aceita strings<br/><br/>
 <a href="https://medium.com/@guimaraessilas/padroniza%C3%A7%C3%A3o-de-c%C3%B3digo-com-eslint-prettier-e-vscode-e5f7f9cd3bb" target="_blank">Usando eslint na aplicação</a>
@@ -14,4 +15,7 @@ npm install @react-native-async-storage/async-storage
 
 # install Sqlite
 expo install expo-sqlite@10.1.0
+
+# install react native picker
+npm install @react-native-picker/picker@2.2.1  
 ```

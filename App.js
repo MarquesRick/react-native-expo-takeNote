@@ -16,7 +16,6 @@ export default function App() {
   const mostraNotas = async () => {
     const todasNotas = await buscarNotas();
     setNotas(todasNotas);
-    console.log(todasNotas);
   };
 
   // asyncstorage
@@ -38,9 +37,9 @@ export default function App() {
       <NotaEditor
         mostraNotas={mostraNotas()}
         notaSelecionada={notaSelecionada}
+        setNotaSelecionada={setNotaSelecionada}
       />
       {/*asyncstorage <NotaEditor mostraNotas={mostraNotas} /> */}
-      <NotaEditor />
       <StatusBar />
     </SafeAreaView>
   );

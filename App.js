@@ -23,7 +23,7 @@ export default function App() {
 
   useEffect(() => {
     criarTabela();
-    //mostraNotas();
+    mostraNotas();
   }, []);
 
   const mostraNotas = async () => {
@@ -32,7 +32,6 @@ export default function App() {
   };
 
   async function filtrarLista(categoriaSelecionada) {
-    console.log('esss');
     setCategoria(categoriaSelecionada);
     if (categoriaSelecionada == 'Todos') {
       mostraNotas();
@@ -75,7 +74,7 @@ export default function App() {
         }}
       />
       <NotaEditor
-        mostraNotas={mostraNotas()}
+        mostraNotas={mostraNotas}
         notaSelecionada={notaSelecionada}
         setNotaSelecionada={setNotaSelecionada}
       />

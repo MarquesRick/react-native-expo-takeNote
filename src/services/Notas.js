@@ -65,3 +65,17 @@ export const deletarNota = async (nota) => {
     });
   });
 };
+
+export async function filtrarPorCategoria(categoria) {
+  return new Promise((resolve) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM Notas WHERE categoria = ?;',
+        [categoria],
+        (tx, results) => {
+          resolve(results.rows._array);
+        }
+      );
+    });
+  });
+}

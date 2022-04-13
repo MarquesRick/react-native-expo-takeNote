@@ -51,3 +51,17 @@ export const atualizarNota = async (nota) => {
     });
   });
 };
+export const deletarNota = async (nota) => {
+  console.log('deletando');
+  return new Promise((resolve) => {
+    db.transaction((transaction) => {
+      transaction.executeSql(
+        'DELETE FROM Notas WHERE id = ?;',
+        [nota.id],
+        () => {
+          resolve('Nota removida com sucesso!');
+        }
+      );
+    });
+  });
+};
